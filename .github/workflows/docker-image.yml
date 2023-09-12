@@ -44,5 +44,5 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.commit_hash.outputs.hash }}
+          tags: 09btmhabib/java-maven-docker-ci-cd-hello-world:${{ steps.commit_hash.outputs.hash }}
           labels: ${{ steps.meta.outputs.labels }}
