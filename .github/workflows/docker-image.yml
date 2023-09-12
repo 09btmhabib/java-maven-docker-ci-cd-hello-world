@@ -1,47 +1,41 @@
-name: Build and upload to Docker Hub
+Build and upload to dockerhub
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
+      - uses: actions/checkout@v3
       - name: Set up JDK 17
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: '17'
-
+          distribution: 'temurin'
+          cache: maven
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-
-      - name: Get Commit Hash
-        id: commit_hash
-        run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
-
       - name: Docker meta
         id: meta
-        uses: docker/metadata-action@v5
+        uses:  docker/metadata-action@v5
         with:
-          images: 09btmhabib/java-maven-docker-ci-cd-hello-world
-          tags: ${{ steps.commit_hash.outputs.hash }}
-
+          images:  09btmhabib/java-maven-docker-ci-cd-hello-world
       - name: Login to Docker Hub
         if: github.event_name != 'pull_request'
-        uses: docker/login-action@v1
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
+       - name: Get Commit Hash
+         id: commit_hash
+         run: echo "::set-output name=hash::$(git rev-parse --short HEAD)"
+            
       - name: Build and push
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v5
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: 09btmhabib/java-maven-docker-ci-cd-hello-world:${{ steps.commit_hash.outputs.hash }}
+          tags: ${{ steps.commit_hash.outputs.hash }}
           labels: ${{ steps.meta.outputs.labels }}
