@@ -25,6 +25,5 @@ jobs:
       with:
        context: .
        tags: |
-           ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:latest
            ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:${{env.RELEASE_VERSION}}
        push: true
