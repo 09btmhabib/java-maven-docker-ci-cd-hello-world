@@ -9,7 +9,6 @@ class JavaMavenDockerCiCdHelloWorldApplicationTests {
 
 	@Test
 	void contextLoads() {
-		Assertions.fail("fail me");
 	}
 
 }
