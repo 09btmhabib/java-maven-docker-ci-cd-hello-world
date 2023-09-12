@@ -24,7 +24,7 @@ jobs:
       uses: docker/build-push-action@v4
       with:
        context: .
-         tags: |
+       tags: |
            ${{ secrets.DOCKERHUB_USERNAME }}/deployinator:latest
            ${{ secrets.DOCKERHUB_USERNAME }}/deployinator:${{env.RELEASE_VERSION}}
-         push: true
+       push: true
