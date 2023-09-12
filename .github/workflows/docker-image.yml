@@ -1,11 +1,8 @@
 
-
-name: Upload image
+name: Build and push image
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
     branches: [ "main" ]
 
 jobs:
@@ -24,10 +21,10 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Publish to Docker Hub
-      uses: docker/build-push-action@v1
+      uses: docker/build-push-action@v4
       with:
-         username: ${{ secrets.DOCKERHUB_USERNAME }}
-         password: ${{ secrets.DOCKERHUB_TOKEN }}
-         repository:  ${{ secrets.DOCKERHUB_USERNAME }}/java-maven-docker-ci-cd-hello-world
-         tags: ${{ steps.docker_tags.outputs.tags }}
-      
+       context: .
+         tags: |
+           ${{ secrets.DOCKERHUB_USERNAME }}/deployinator:latest
+           ${{ secrets.DOCKERHUB_USERNAME }}/deployinator:${{env.RELEASE_VERSION}}
+         push: true
