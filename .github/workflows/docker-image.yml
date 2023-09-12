@@ -38,5 +38,5 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/j${{ secrets.DOCKERHUB_REPO }}:${{ steps.commit_hash.outputs.hash }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:${{ steps.commit_hash.outputs.hash }}
           labels: ${{ steps.commit_hash.outputs.hash }}
