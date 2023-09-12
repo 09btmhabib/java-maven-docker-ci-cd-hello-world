@@ -22,12 +22,6 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: 09btmhabib/java-maven-docker-ci-cd-hello-world
-
       - name: Login to Docker Hub
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v3
@@ -44,5 +38,5 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: 09btmhabib/java-maven-docker-ci-cd-hello-world:${{ steps.commit_hash.outputs.hash }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/j${{ secrets.DOCKERHUB_REPO }}:${{ steps.commit_hash.outputs.hash }}
+          labels: ${{ steps.commit_hash.outputs.hash }}
