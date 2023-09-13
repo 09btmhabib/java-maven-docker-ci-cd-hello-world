@@ -11,7 +11,7 @@
 	<groupId>com.mhabib</groupId>
 	<artifactId>spring-boot-github-actions-docker-cicd</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-boot-github-actions-docker-cicd/name>
+	<name>spring-boot-github-actions-docker-cicd</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
@@ -37,5 +37,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
