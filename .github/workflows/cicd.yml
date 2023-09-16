@@ -49,9 +49,8 @@ jobs:
       - name: Update image version in helm-chart-repo/values.yaml
         run: |
           yq --inplace '.image.tag = "${{ github.run_number }}"' my_helm/deploy/values.yaml
-      - name: Commit and push changes to helm-chart-repo
-        run: |
-            cd my_helm/deploy
-            git add values.yaml
-            git commit -m "Updated image version to ${{ github.run_number }}"
-            git push
+      - name: Commit and push changes
+        uses: commit-push/commit-push@v1
+        with:
+            github_token: ${{ secrets.REPO_SECRET  }}
+            message: "Updated image version to ${{ github.run_number }}"
