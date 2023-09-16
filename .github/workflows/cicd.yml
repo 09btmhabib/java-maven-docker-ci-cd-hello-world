@@ -51,9 +51,9 @@ jobs:
           yq --inplace '.image.tag = "${{ github.run_number }}"' my_helm/deploy/values.yaml
       - name: Commit and push changes to helm-chart-repo
         run: |
-            git config user.name 09btmhabib
-            git config user.email mazhar.habib250@gmai.com
+            git config --global  user.name "09btmhabib"
+            git config --global  user.email "mazhar.habib250@gmail.com"
             cd my_helm/deploy
             git add values.yaml
             git commit -m "Updated image version to ${{ github.run_number }}"
-            git push
+            git push https://github.com/09btmhabib/spring-app-deploymentse-apps.git main
