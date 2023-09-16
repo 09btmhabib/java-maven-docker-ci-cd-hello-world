@@ -1,4 +1,4 @@
-package com.mhabib.javamavendockercicdhelloworld;
+package com.mhabib.springgithubactions;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
