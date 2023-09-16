@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.mhabib</groupId>
-	<artifactId>spring-boot-github-actions-docker-cicd</artifactId>
+	<artifactId>spring-github-actions</artifactId>
 	<version>0.0.1</version>
 	<name>spring-spring-github-actions</name>
 	<description>Demo project for Spring Boot</description>
