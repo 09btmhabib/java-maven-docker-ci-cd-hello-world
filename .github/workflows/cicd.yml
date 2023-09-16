@@ -45,7 +45,7 @@ jobs:
             path: my_helm
       - name: Update image version in helm-chart-repo/values.yaml
         run: |
-          yq --inplace '.image.tag = "${{ github.run_number }}"' helm-chart/values.yaml
+          yq --inplace '.image.tag = "${{ github.run_number }}"' deploy/values.yaml
       - name: Commit and push changes to helm-chart-repo
         run: |
             cd deploy
