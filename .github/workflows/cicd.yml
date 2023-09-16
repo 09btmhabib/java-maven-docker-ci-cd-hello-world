@@ -44,11 +44,8 @@ jobs:
             token: ${{ secrets.REPO_SECRET }} # `GH_PAT` is a secret that contains your PAT
             path: my_helm
       - name: Run ls command
-        uses: actions/github-script@v6
-        with:
-            script: |
-              const output = await exec('ls');
-              console.log(output);
+        run: |
+            ls
       - name: Update image version in helm-chart-repo/values.yaml
         run: |
           yq --inplace '.image.tag = "${{ github.run_number }}"' spring-app-deploymentse-apps/deploy/values.yaml
