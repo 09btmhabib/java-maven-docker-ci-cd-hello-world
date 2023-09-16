@@ -4,13 +4,12 @@ on:
     branches:
       - main
 jobs:
-
-  buildAndDeploy:
+  buildAndPushImage:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-        
+
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -33,4 +32,12 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:${{ github.run_number }}
+  deploy:
+    needs: buildAndPushImage
+    runs-on: ubuntu-latest
+    steps:
+      - name: changing the deployment of git repo
+        uses: actions/checkout@v4
+        run: |
+            git clone https://github.com/09btmhabib/spring-github-actions.git helm-chart-repo
