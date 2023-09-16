@@ -1,4 +1,4 @@
-FROM openjdk:11
+FROM adoptopenjdk:17-jre-hotspot
 
 EXPOSE 8080
 
