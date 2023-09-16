@@ -45,13 +45,13 @@ jobs:
             path: my_helm
       - name: Run ls command
         run: |
-            ls
+          ls -R
       - name: Update image version in helm-chart-repo/values.yaml
         run: |
-          yq --inplace '.image.tag = "${{ github.run_number }}"' spring-app-deploymentse-apps/deploy/values.yaml
+          yq --inplace '.image.tag = "${{ github.run_number }}"' my_helm/spring-app-deploymentse-apps/deploy/values.yaml
       - name: Commit and push changes to helm-chart-repo
         run: |
-            cd spring-app-deploymentse-apps/deploy
+            cd my_helm/spring-app-deploymentse-apps/deploy
             git add values.yaml
             git commit -m "Updated image version to ${{ github.run_number }}"
             git push
