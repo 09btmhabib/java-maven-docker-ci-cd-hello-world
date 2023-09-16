@@ -39,5 +39,7 @@ jobs:
     steps:
       - name: changing the deployment of git repo
         uses: actions/checkout@v4
-        run: |
-            git clone https://github.com/09btmhabib/spring-github-actions.git helm-chart-repo
+        with:
+            repository: 09btmhabib/spring-app-deploymentse-apps
+            token: ${{ secrets.REPO_SECERT }} # `GH_PAT` is a secret that contains your PAT
+            path: my_helm
