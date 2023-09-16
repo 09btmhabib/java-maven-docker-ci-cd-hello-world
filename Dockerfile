@@ -1,9 +1,9 @@
-FROM openjdk:11
+FROM adoptopenjdk:17-jre-hotspot
 
 EXPOSE 8080
 
 WORKDIR /applications
 
-COPY target/spring-boot-github-actions-docker-cicd-0.0.1-SNAPSHOT.jar /applications/spring-boot-github-actions-docker-cicd-0.0.1-SNAPSHOT.jar
+COPY target/spring-github-actions-0.0.1.jar /applications/application.jar
 
-ENTRYPOINT ["java","-jar", "spring-boot-github-actions-docker-cicd-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar", "application.jar"]
